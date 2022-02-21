@@ -1,0 +1,14 @@
+1-
+verificar diferenças de var e let
+ler sobre o hoisting
+
+-----------------------------------------------------------------
+2-
+praticar console.log e typeof
+
+-----------------------------------------------------------------
+3-
+pesquisar sobre o primeiro programador e primeira programadora
+-----------------------------------------------------------------
+4-
+ler os conteúdos do class
