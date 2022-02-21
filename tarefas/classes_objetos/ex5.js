@@ -1,0 +1,85 @@
+const prompt = require("prompt-sync")({ sigint: true });
+
+class Televisor{           
+    constructor(fabricante = String, modelo = String, canal_atual,lista_canais,volume = 0){
+        if(fabricante.length > 0 && modelo.length > 0){
+            this.fabricante = fabricante;
+            this.modelo = modelo;
+            this.lista_canais = lista_canais;
+            this.canal_atual = canal_atual;
+            this.volume = volume;
+        }
+        else throw console.log("Dados inválidos para criação do obj");
+    }
+}
+
+class ControleRemoto{
+    constructor(obj_televisor = Object){
+        this.obj_televisor = obj_televisor;
+    }
+    alterarVolume = function (novo_volume){    //Metodo para alterar volume do obj
+        if(isNaN(novo_volume) !== true && novo_volume >= 0 && novo_volume <= 100){
+            if(this.obj_televisor.volume > novo_volume) {
+                console.log(`\nVolume foi reduzido de ${this.obj_televisor.volume} para ${novo_volume}\n`);
+            }
+            else {
+                console.log(`\nVolume foi aumentado de ${this.obj_televisor.volume} para ${novo_volume}\n`);
+            }
+            this.obj_televisor.volume = novo_volume;
+            
+        }
+    }
+    
+    alterarCanal = function (canal){        //metodo para altera e/ou adicionar novo canal
+        if(canais.indexOf(canal) !== -1 && isNaN(canal) !== true && canal > 0){
+            console.log(`\nTelevisor alterou do canal ${this.obj_televisor.canal_atual} para sintonizar no canal ${canal}\n`);
+        }
+        else if(canais.indexOf(canal) === -1 && isNaN(canal) !== true && canal > 0){
+            canais.push(canal);
+            console.log(`\nNovo canal adicionado a sua lista de canais, agora seu Televisor está sintonizado no canal ${canal}\n`);
+        }
+        else return console.log("\nValor inválido para Canal\n");
+        this.obj_televisor.lista_canais = [...canais];
+        this.obj_televisor.canal_atual = canal;
+    }
+}
+
+const canais = []; 
+const fabricante = prompt(console.log("Digite o fabricante do Televisor")), modelo = prompt(console.log("Digite o modelo do Televisor"));
+const tv1 = new Televisor(fabricante,modelo);
+const controle1 = new ControleRemoto(tv1);
+
+for(let validar = true; validar;){ //laço para validar opção deseja pelo usuário, sobre qual metodo invocar
+    let opcao;
+    //Todo Do While é para verificar se váriavel recebeu o tipo de valor desejado, para que não quebre o código
+    do{
+        opcao = parseInt(prompt(console.log("\nEscolha uma opção:\nMudar volume  [1]\nMudar Canal   [2]\nParar         [3]\n")));
+    }while(isNaN(opcao) || opcao < 0 || opcao > 3);
+    
+    switch (opcao){ //case para executa somente a opção selecionada
+        case 1:
+            let volume;
+            do{
+                volume = parseInt(prompt(console.log("\nDigite o novo volume (0 a 100): ")));
+            }while(isNaN(volume) || volume < 0 || volume > 100);
+            controle1.alterarVolume(volume);
+            break;
+        case 2:
+            let canal;
+            do{
+                canal = parseInt(prompt(console.log("\nDigite o canal a sintonizar: ")));
+            }while(isNaN(canal) || canal < 0);
+            controle1.alterarCanal(canal);
+            break;
+        case 3:
+            validar = false;
+            break;
+
+    }
+}
+
+console.log(controle1);
+
+/*Não entendi muito bem esse ex, mas pelo oque foi apresentado, interpretei que deveria criar um obj a partir
+da classe Televisor e passar como atributo ao obj da classe Controle remoto, e posteriormente passei os 
+metodos a classe, que executava ações dentro do obj que foi passado como atributo*/

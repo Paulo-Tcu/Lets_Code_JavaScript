@@ -1,0 +1,19 @@
+{
+  "name": "tarefas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "exec-switch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "init": "^0.1.2",
+    "prompt-sync": "^4.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.9.0"
+  }
+}
